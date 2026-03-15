@@ -16,8 +16,7 @@ public class MusicOrganizer
     private MusicPlayer player;
     // A reader that can read music files and load them as tracks.
     private TrackReader reader;
-
-    
+    // An ArrayList for keeping track of songs played, only used in shuffle()
     ArrayList <Integer> songTracker = new ArrayList <Integer>();
 
     /**
@@ -131,6 +130,9 @@ public class MusicOrganizer
         }
     }
     
+    /**
+     * Uses random with the size of tracks to pick a random song to play.
+     */
     public void shake()
     {
         Random num = new Random();
@@ -138,16 +140,17 @@ public class MusicOrganizer
         player.startPlaying(tracks.get(numPicked).getFilename());
     }
     
+    /**
+     * Similar to shake but makes it so in the playlist each song can only be
+     * played once and once all have, resets the ArrayList tracking if each song
+     * was played.
+     */
      public void shuffle()
     {
         boolean ifRepeat = false;
         Random num = new Random();
-        
         int numPicked = num.nextInt(tracks.size());
         Integer picked = new Integer(numPicked);        
-        System.out.println(picked);
-        System.out.println(songTracker);
-        
         
         for(int i = 0; i < songTracker.size(); i++)
         {
@@ -169,9 +172,6 @@ public class MusicOrganizer
                 }
             }
         }
-        
-        //player.startPlaying(tracks.get(numPicked).getFilename());  
-
     }
     
     /**
